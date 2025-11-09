@@ -1,0 +1,49 @@
+import api from "@/API/axios";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+
+interface AuthStore {
+  token: string | null;
+  user: User | null;
+  setToken: (token: string | null) => void;
+  setUser: (user: User | null) => void;
+  checkAuth: () => Promise<void>;
+  isCheckingAuth: boolean;
+}
+
+const useAuthStore = create<AuthStore>()(
+  persist(
+    (set) => ({
+      token: null,
+      user: null,
+      isCheckingAuth: false,
+      setToken: (token) => set({ token }),
+      setUser: (user) => set({ user }),
+      checkAuth: async () => {
+        set({ isCheckingAuth: true });
+        try {
+          const response = await api.get("/auth/check");
+          if (response.data.success) {
+            set({ user: response.data.user, token: response.data.token });
+          } else {
+            set({ user: null, token: null });
+          }
+        } catch (error) {
+          console.log(error);
+          set({ user: null, token: null });
+        } finally {
+          set({ isCheckingAuth: false });
+        }
+      },
+    }),
+    {
+      name: "auth-store",
+      partialize: (state) => ({
+        token: state.token,
+        user: state.user,
+      }),
+    }
+  )
+);
+
+export default useAuthStore;

@@ -1,0 +1,9 @@
+export { default as Dashboard } from "./Dashboard";
+export { default as Transactions } from "./Transactions";
+export { default as TransactionDetails } from "./TransactionDetails";
+export { default as Wallet } from "./Wallet";
+export { default as Fund } from "./Fund";
+export { default as Services } from "./Services";
+export { default as Profile } from "./Profile";
+export { default as Share } from "./Share";
+export { default as Support } from "./Support";
