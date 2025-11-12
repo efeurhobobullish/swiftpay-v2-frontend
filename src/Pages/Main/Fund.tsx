@@ -18,8 +18,8 @@ import { useState } from "react";
 
 const ninSchema = z.object({
   nin: z
-    .number({ invalid_type_error: "Enter a valid NIN number" })
-    .min(10, "Your NIN must be 11-digits"),
+    .number({ invalid_type_error: "Enter a valid BVN number" })
+    .min(10, "Your BVN must be 11-digits"),
 });
 
 type NinSchema = z.infer<typeof ninSchema>;
@@ -46,7 +46,7 @@ const Fund = () => {
 
   const onError = (error: FieldErrors<NinSchema>) => {
     console.log(error);
-    toast.error("Invalid NIN");
+    toast.error("Invalid BVN");
   };
 
   const [copied, setCopied] = useState(false);
@@ -71,9 +71,9 @@ const Fund = () => {
           <div className="flex items-center gap-2 bg-yellow-100 text-yellow-700 rounded-xl p-4 mb-4">
             <Info size={18} className=" mt-1 flex-shrink-0" />
             <p className="font-medium text-xs">
-              According to CBN, your National Identification Number (NIN) is
+              According to CBN, your Bank Verification Number (BVN) is
               required to generate a dedicated virtual account number for you,
-              to be used on Questpay.
+              to be used on Swiftpay.
             </p>
           </div>
         )}
@@ -85,17 +85,17 @@ const Fund = () => {
               className="space-y-5"
             >
               <InputWithIcon
-                label="National Identity Number (NIN)"
+                label="Bank Verification Number (BVN)"
                 type="number"
                 icon={<IdCard />}
-                placeholder="Enter your 11-digits NIN"
+                placeholder="Enter your 11-digits BVN"
                 {...register("nin", { valueAsNumber: true })}
                 error={errors?.nin && errors?.nin.message}
               />
 
               <ButtonWithLoader
                 loading={isLoading}
-                initialText="Generate Aza"
+                initialText="Generate Account"
                 loadingText="Generating..."
                 className="btn-primary-2 text-sm h-10 w-full rounded-full"
               />
