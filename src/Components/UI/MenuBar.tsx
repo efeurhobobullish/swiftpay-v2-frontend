@@ -8,13 +8,6 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
-const menuItems = [
-  { name: "Home", icon: Home, link: "/dashboard" },
-  { name: "Messages", icon: MessageSquareText, link: "/messages" },
-  { name: "Profile", icon: UserRound, link: "/profile" },
-  { name: "Settings", icon: Cog, link: "/settings" },
-  { name: "Explore", icon: Search, link: "/explore" }, // moved from floating
-];
 
 const MenuBar = () => {
   return (
