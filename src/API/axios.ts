@@ -2,7 +2,7 @@ import axios from "axios";
 import { useAuthStore } from "@/Stores"; 
 
 const api = axios.create({
-  baseURL: "https://swiftpay-v2-backend-caa6dcc63849.herokuapp.com",
+  baseURL: "https://swiftpaylite-backend-61677663bd02.herokuapp.com",
   withCredentials: true,
 });
 
