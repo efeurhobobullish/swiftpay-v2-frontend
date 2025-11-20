@@ -7,26 +7,25 @@ import {
     FolderGit2,
     X,
     LayoutGrid,
-    Home,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 const menuItems = [
-    { name: "Home", icon: Home, link: "/home" },
-    { name: "Profile", icon: User, link: "/profile" },
-    { name: "Projects", icon: FolderGit2, link: "/projects" },
     { name: "Chats", icon: MessageSquare, link: "/chats" },
+    { name: "Profile", icon: User, link: "/profile" },
     { name: "Teams", icon: Users, link: "/teams" },
+    { name: "Projects", icon: FolderGit2, link: "/projects" },
     { name: "Snippets", icon: Code, link: "/snippets" },
     { name: "Settings", icon: Settings, link: "/settings" },
 ];
 
 const MenuBar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const firstTwo = menuItems.slice(0, 2); // Home, Profile
-    const lastItems = menuItems.slice(2); // Projects + everything else
+    const firstTwo = menuItems.slice(0, 2);
+    const lastThree = menuItems.slice(2, 5);
+    const settingsItem = menuItems.slice(5);
 
     useEffect(() => {
         document.body.style.overflow = isOpen ? "hidden" : "auto";
@@ -58,7 +57,7 @@ const MenuBar = () => {
                 </ul>
 
                 <button
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => setIsOpen(true)}
                     aria-label="Open menu"
                     className="absolute border-4 border-primary -top-1/2 left-1/2 -translate-x-1/2 bg-white text-primary h-18 w-18 flex items-center justify-center rounded-full"
                 >
@@ -87,7 +86,25 @@ const MenuBar = () => {
                             className="fixed bottom-40 left-1/2 -translate-x-1/2 w-[80%] md:w-[480px] bg-background dark:bg-foreground p-4 rounded-3xl z-50 shadow-xl"
                         >
                             <ul className="space-y-2">
-                                {lastItems.map((item) => (
+                                {lastThree.map((item) => (
+                                    <li key={item.name}>
+                                        <NavLink
+                                            to={item.link}
+                                            onClick={() => setIsOpen(false)}
+                                            className={({ isActive }) =>
+                                                isActive
+                                                    ? "flex items-center gap-2 text-sm font-medium bg-foreground rounded-lg p-4 border border-white/10 backdrop-blur-sm"
+                                                    : "flex items-center gap-2 text-sm font-medium text-muted rounded-lg hover:text-main hover:border-line hover:bg-foreground hover:dark:border-white/10 border border-transparent p-4"
+                                            }
+                                        >
+                                            <item.icon size={20} />
+                                            <span>{item.name}</span>
+                                        </NavLink>
+                                    </li>
+                                ))}
+                                
+                                {/* Settings separated */}
+                                {settingsItem.map((item) => (
                                     <li key={item.name}>
                                         <NavLink
                                             to={item.link}
