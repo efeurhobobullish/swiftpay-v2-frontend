@@ -15,8 +15,8 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const menuItems = [
     { name: "Home", icon: Home, link: "/home" },
-    { name: "Projects", icon: FolderGit2, link: "/projects" },
     { name: "Profile", icon: User, link: "/profile" },
+    { name: "Projects", icon: FolderGit2, link: "/projects" },
     { name: "Chats", icon: MessageSquare, link: "/chats" },
     { name: "Teams", icon: Users, link: "/teams" },
     { name: "Snippets", icon: Code, link: "/snippets" },
@@ -25,8 +25,8 @@ const menuItems = [
 
 const MenuBar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const mainItems = menuItems.slice(0, 3); // Home, Projects, Profile
-    const menuItemsList = menuItems.slice(3); // Remaining items for the menu
+    const firstTwo = menuItems.slice(0, 2); // Home, Profile
+    const lastItems = menuItems.slice(2); // Projects + everything else
 
     useEffect(() => {
         document.body.style.overflow = isOpen ? "hidden" : "auto";
@@ -40,7 +40,7 @@ const MenuBar = () => {
             {/* Main floating bar */}
             <div className="bg-primary p-4 rounded-full fixed bottom-4 left-1/2 -translate-x-1/2 z-50 shadow-xl">
                 <ul className="flex items-center gap-20">
-                    {mainItems.map((item) => (
+                    {firstTwo.map((item) => (
                         <li key={item.name}>
                             <NavLink
                                 to={item.link}
@@ -87,7 +87,7 @@ const MenuBar = () => {
                             className="fixed bottom-40 left-1/2 -translate-x-1/2 w-[80%] md:w-[480px] bg-background dark:bg-foreground p-4 rounded-3xl z-50 shadow-xl"
                         >
                             <ul className="space-y-2">
-                                {menuItemsList.map((item) => (
+                                {lastItems.map((item) => (
                                     <li key={item.name}>
                                         <NavLink
                                             to={item.link}
