@@ -25,7 +25,7 @@ const menuItems = [
 
 const MenuBar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [hasUnread, setHasUnread] = useState(true);
+    const hasUnread = true; // Simplified - in real app this would come from state/props
     const primaryItems = menuItems.slice(0, 3);
     const secondaryItems = menuItems.slice(3);
 
