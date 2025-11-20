@@ -3,11 +3,9 @@ import {
   Home,
   MessageSquareText,
   Plus,
-  Search,
   UserRound,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
-
 
 const MenuBar = () => {
   return (
@@ -18,7 +16,7 @@ const MenuBar = () => {
         <IconLink to="/messages" icon={MessageSquareText} />
       </div>
 
-      {/* Floating Middle Button (Main Action - New Chat) */}
+      {/* Floating Main Button (New Chat or Primary Action) */}
       <button
         aria-label="Start new chat"
         className="bg-blue-600 hover:bg-blue-700 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all"
