@@ -7,15 +7,17 @@ import {
     FolderGit2,
     X,
     LayoutGrid,
+    Home,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 const menuItems = [
-    { name: "Chats", icon: MessageSquare, link: "/chats" },
+    { name: "Home", icon: Home, link: "/home" },
     { name: "Projects", icon: FolderGit2, link: "/projects" },
     { name: "Profile", icon: User, link: "/profile" },
+    { name: "Chats", icon: MessageSquare, link: "/chats" },
     { name: "Teams", icon: Users, link: "/teams" },
     { name: "Snippets", icon: Code, link: "/snippets" },
     { name: "Settings", icon: Settings, link: "/settings" },
@@ -23,9 +25,8 @@ const menuItems = [
 
 const MenuBar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const firstTwo = menuItems.slice(0, 2);
-    const lastThree = menuItems.slice(2, 5);
-    const settingsItem = menuItems.slice(5);
+    const mainItems = menuItems.slice(0, 3); // Home, Projects, Profile
+    const menuItemsList = menuItems.slice(3); // Remaining items for the menu
 
     useEffect(() => {
         document.body.style.overflow = isOpen ? "hidden" : "auto";
@@ -39,7 +40,7 @@ const MenuBar = () => {
             {/* Main floating bar */}
             <div className="bg-primary p-4 rounded-full fixed bottom-4 left-1/2 -translate-x-1/2 z-50 shadow-xl">
                 <ul className="flex items-center gap-20">
-                    {firstTwo.map((item) => (
+                    {mainItems.map((item) => (
                         <li key={item.name}>
                             <NavLink
                                 to={item.link}
@@ -57,7 +58,7 @@ const MenuBar = () => {
                 </ul>
 
                 <button
-                    onClick={() => setIsOpen(true)}
+                    onClick={() => setIsOpen(!isOpen)}
                     aria-label="Open menu"
                     className="absolute border-4 border-primary -top-1/2 left-1/2 -translate-x-1/2 bg-white text-primary h-18 w-18 flex items-center justify-center rounded-full"
                 >
@@ -86,25 +87,7 @@ const MenuBar = () => {
                             className="fixed bottom-40 left-1/2 -translate-x-1/2 w-[80%] md:w-[480px] bg-background dark:bg-foreground p-4 rounded-3xl z-50 shadow-xl"
                         >
                             <ul className="space-y-2">
-                                {lastThree.map((item) => (
-                                    <li key={item.name}>
-                                        <NavLink
-                                            to={item.link}
-                                            onClick={() => setIsOpen(false)}
-                                            className={({ isActive }) =>
-                                                isActive
-                                                    ? "flex items-center gap-2 text-sm font-medium bg-foreground rounded-lg p-4 border border-white/10 backdrop-blur-sm"
-                                                    : "flex items-center gap-2 text-sm font-medium text-muted rounded-lg hover:text-main hover:border-line hover:bg-foreground hover:dark:border-white/10 border border-transparent p-4"
-                                            }
-                                        >
-                                            <item.icon size={20} />
-                                            <span>{item.name}</span>
-                                        </NavLink>
-                                    </li>
-                                ))}
-                                
-                                {/* Settings separated */}
-                                {settingsItem.map((item) => (
+                                {menuItemsList.map((item) => (
                                     <li key={item.name}>
                                         <NavLink
                                             to={item.link}
